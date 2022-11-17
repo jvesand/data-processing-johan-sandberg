@@ -28,7 +28,8 @@ df_dict = {
 # styling cheatsheet: https://hackerthemes.com/bootstrap-cheatsheet/
 app = dash.Dash(
     __name__,
-    external_stylesheets=[dbc.themes.MATERIA],
+    external_stylesheets=[dbc.themes.MATERIA], # looks in assets map by default
+    # makes responsivity possible (different web browser sizes)
     meta_tags=[dict(name="viewport", content="width=device-width, initial-scale=1.0")],
 )
 
@@ -66,7 +67,7 @@ def highest_lowest_value_update(json_df, ohlc):
     highest_value = dff[ohlc].max()
     lowest_value = dff[ohlc].min()
     # first goest to first output, second to second
-    return highest_value, lowest_value
+    return f"${highest_value:.2f}", f"${lowest_value:.2f}"
 
 
 @app.callback(
