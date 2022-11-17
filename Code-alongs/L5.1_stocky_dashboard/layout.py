@@ -83,16 +83,16 @@ class Layout:
                                 dbc.Row(
                                     dbc.Card(
                                         [
-                                            html.H2("Highest value"),
-                                            html.P(id="highest-value"),
+                                            html.H2("Highest value", className="h5 mt-3 mx-3"), # h5 smaller size, in bootstrap can have several style classes
+                                            html.P(id="highest-value", className="h1 mx-2 text-success"),
                                         ]
                                     )
                                 ),
                                 dbc.Row(
                                     dbc.Card(
                                         [
-                                            html.H2("Lowest value"),
-                                            html.P(id="lowest-value"),
+                                            html.H2("Lowest value", className="h5 mt-3 mx-3"),
+                                            html.P(id="lowest-value", className="h1 mx-2 text-danger"),
                                         ]
                                     )
                                 ),
