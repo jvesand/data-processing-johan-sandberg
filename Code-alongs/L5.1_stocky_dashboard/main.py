@@ -6,6 +6,7 @@ import plotly_express as px
 from time_filtering import filter_time
 import pandas as pd
 from layout import Layout
+import dash_bootstrap_components as dbc
 
 directory_path = os.path.dirname(__file__)
 path = os.path.join(directory_path, "stocks_data")
@@ -23,7 +24,13 @@ df_dict = {
 }  # dict loop takes keys, if want values do .items()
 
 # create a Dash App
-app = dash.Dash(__name__)
+# themes: http://dash-bootstrap-components.opensource.faculty.ai/docs/themes/explorer/
+# styling cheatsheet: https://hackerthemes.com/bootstrap-cheatsheet/
+app = dash.Dash(
+    __name__,
+    external_stylesheets=[dbc.themes.MATERIA],
+    meta_tags=[dict(name="viewport", content="width-device-width, initial-scale=1.0")],
+)
 
 app.layout = Layout(symbol_dict).layout()
 
