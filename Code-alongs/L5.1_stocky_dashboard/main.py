@@ -29,7 +29,7 @@ df_dict = {
 app = dash.Dash(
     __name__,
     external_stylesheets=[dbc.themes.MATERIA],
-    meta_tags=[dict(name="viewport", content="width-device-width, initial-scale=1.0")],
+    meta_tags=[dict(name="viewport", content="width=device-width, initial-scale=1.0")],
 )
 
 app.layout = Layout(symbol_dict).layout()

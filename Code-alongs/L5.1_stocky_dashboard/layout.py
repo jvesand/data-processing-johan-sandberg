@@ -32,13 +32,20 @@ class Layout:
                 dbc.Row(
                     className="mt-4",
                     children=[
-                        dbc.Col(html.P("Choose a stock"), className="mt-1"),
+                        dbc.Col(
+                            html.P("Choose a stock"),
+                            className="mt-1",
+                            lg="4",
+                            xl={"offset": 2, "size": 2},
+                        ),  # can use dictionary to give more granula arguments
                         dbc.Col(
                             dcc.Dropdown(
                                 id="stockpicker-dropdown",
                                 options=self._stock_options_dropdown,
                                 value="AAPL",
-                            ), lg = "4" # specifying width (total width is 12)
+                            ),
+                            lg="4",  # specifying width (total width is 12) (for large screens)
+                            xl="3",
                         ),
                         dbc.Col(
                             dbc.Card(
@@ -48,23 +55,50 @@ class Layout:
                                     options=self._ohlc_options,
                                     value="close",
                                 )
-                            )
-                        )
+                            ),
+                            lg="4",
+                            xl="3",
+                        ),
+                    ],
+                ),
+                dbc.Row(
+                    [
+                        dbc.Col(
+                            [
+                                dcc.Graph(id="stock-graph"),
+                                dcc.Slider(
+                                    id="time-slider",
+                                    min=0,
+                                    max=6,
+                                    marks=self._slider_marks,
+                                    value=2,
+                                    step=None,
+                                ),
+                            ],
+                            lg={"size": 6},
+                            xl=6,
+                        ),
+                        dbc.Col(
+                            [
+                                dbc.Row(
+                                    dbc.Card(
+                                        [
+                                            html.H2("Highest value"),
+                                            html.P(id="highest-value"),
+                                        ]
+                                    )
+                                ),
+                                dbc.Row(
+                                    dbc.Card(
+                                        [
+                                            html.H2("Lowest value"),
+                                            html.P(id="lowest-value"),
+                                        ]
+                                    )
+                                ),
+                            ]
+                        ),
                     ]
-                ),
-                html.P(id="highest-value"),
-                html.P(id="lowest-value"),
-                dcc.RadioItems(
-                    id="ohlc-radio", options=self._ohlc_options, value="close"
-                ),
-                dcc.Graph(id="stock-graph"),
-                dcc.Slider(
-                    id="time-slider",
-                    min=0,
-                    max=6,
-                    marks=self._slider_marks,
-                    value=2,
-                    step=None,
                 ),
                 # storing intermediate value on clients browser in order to share between several callbacks
                 dcc.Store(id="filtered_df"),
